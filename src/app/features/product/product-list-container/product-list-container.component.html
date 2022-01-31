@@ -1,0 +1,41 @@
+<div class="container">
+    <!-- filters -->
+    <section class="filters">
+        <!-- search box -->
+        <div class="search-box">
+            <input class="search-box__input" placeholder="Search..." type="text" name="txt_search" id="">
+            <button type="submit" class="search-box__btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <!-- filter list -->
+        <div>
+            <!-- filter header -->
+            <h5>Categories</h5>
+            <!-- filter list -->
+            <ul class="list list--vr-separator">
+
+                <li *ngFor="let class of classObj" [class]="class.liClassName"><i [class]="class.iClassName"></i>{{class.name}}</li>
+            </ul>
+        </div>
+        <!-- filter tags -->
+        <div>
+            <!-- filter header -->
+            <h5>Tags</h5>
+            <!-- filter tags -->
+            <div class="tags">
+                <span *ngFor="let class of tagClassObj" [class]="class.ClassName1">{{class.name}} </span>
+            </div>
+        </div>
+        <!-- related items -->
+        <div>
+            <!-- title -->
+            <h5></h5>
+            <!-- small item -->
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </section>
+    <app-product-list class="item-listing"></app-product-list>
+    </div>

@@ -1,0 +1,120 @@
+<!-- This page is for admin to add product to database -->
+
+
+    <!-- add Item -->
+    <div class=" container">
+        <form class="add-product"  #myForm="ngForm">
+            <div class="add-product__images slider">
+                <div class="add-product__image-actions">
+                    <div class="add-product__image-action">
+                        <a href="#"><i class="fas fa-plus-square"></i></a>
+                        <a href="#"><i class="fas fa-edit"></i></a>
+                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                </div>
+                <div class="slider__items">
+                    <div class="slider__item active" style="background-image: url()"></div>
+                    <div class="slider__item" style="background-image: url()"></div>
+                    <div class="slider__item" style="background-image: url()"></div>
+                </div>
+                <div class="slider__indicators">
+                    <span class="slider__indicator active"></span>
+                    <span class="slider__indicator"></span>
+                    <span class="slider__indicator"></span>
+                </div>
+            </div>
+            <div class="add-product__data">
+                <div class="form-controls">
+                    <section class="tabs">
+                        <div class="tabs__headers">
+                            <div class="tabs__header active">
+                                English
+                            </div>
+                            <div class="tabs__header">
+                                Arabic
+                            </div>
+                        </div>
+                        <div class="tabs__bodies">
+                            <div class="tabs__body active">
+                                <div class="form-group" [ngClass]="{'invalid' : inputName.invalid && inputName.touched}" >
+                                    <label for="">Name</label>
+                                    <input ngModel class="form-control" type="text" name="productName" id="" #inputName=ngModel required class="form-control">
+                                    <div *ngIf="inputName.invalid && inputName.touched && inputName.errors?.['required']">Enter Your Name Please</div>
+                                </div>
+                                <div class="form-group" [ngClass]="{'invalid' : description.invalid && description.touched}">
+                                    <label for="">Description</label>
+                                    <textarea ngModel class="form-control" name="description" id="" cols="30" rows="4" #description=ngModel required></textarea>
+                                    <div *ngIf="description.invalid && description.touched && description.errors?.['required']">Fill Description</div>
+                                </div>
+                            </div>
+                            <div class="tabs__body ">
+                                <div class="form-group invalid">
+                                    <label for="">Name</label>
+                                    <input class="form-control" type="text" name="" id="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Description</label>
+                                    <textarea class="form-control" name="" id="" cols="30" rows="4"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="form-group" [ngClass]="{'invalid' : price.invalid && price.touched}">
+                        <label for="">Price</label>
+                        <input [value]="product.price" class="form-control" type="number" name="Price" id="" required #price=ngModel ngModel>
+                        <div *ngIf="price.invalid && price.touched && price.errors?.['required']">Add a price</div>
+                        <!-- <span>{{product.price}}</span> -->
+                    </div>
+                    <div class="add-product__discount">
+                        <div class="form-group">
+                            <label for="">Status</label>
+                            <div class="form-group__radios">
+                                <!-- i want to have the value of them before submit -->
+                                <!-- not prefer to use true/false as it is transfer to string -->
+                                <div class="form-group__radio"><input ngModel type="radio" name="Sale" value=1  id="" #noSale=ngModel ><span>On Sale</span></div>
+                                <div class="form-group__radio"><input ngModel type="radio" name="Sale" value=0 id="" #noSale=ngModel><span>Not On Sale</span></div>
+                                <!-- <span>{{noSale.value}}</span> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Discount</label>
+                            <input ngModel class="form-control" type="number" name="Discount" id="" [disabled]=" noSale.value != 1 ">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Payment Types</label>
+                        <div class="form-group__checkboxs">
+                            <div class="form-group__checkbox" *ngFor="let payment of paymentOption ; let i = index" ><input ngModel type="checkbox" [name]="'check' +i" id="" [value]="payment.id" (input)="checkBoxData(i)" ><span>{{payment.name}}</span></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Category</label>
+                        <select ngModel class="form-control" name="category" id="">
+                            <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="taged-textbox form-group">
+                        <label class="taged-textbox__lable" for="">Tags</label>
+                        <div class="taged-textbox__data">
+                            <div class="taged-textbox__tags" >
+                                <div *ngFor="let tag of tags" class="taged-textbox__tag" [id]="tag.id"><span>{{tag.name}}</span><a class="taged-textbox__remove"><i
+                                            class="fas fa-times"></i></a></div>
+                               
+                            </div>
+                            <div class="taged-textbox__clear">
+                                <a><i class="fas fa-times"></i></a>
+                            </div>
+                        </div>
+                        <!-- <input class="taged-textbox__textbox form-control" type="text" name="tag" id=""> -->
+                    </div>
+                    <div class="add-product__actions">
+                        <button class="btn btn--gray">Cancel</button>
+                        <button class="btn btn--primary" (click)="sendForm(myForm)" [disabled]="myForm.invalid">Add</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+   
