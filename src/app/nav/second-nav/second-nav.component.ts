@@ -19,11 +19,11 @@ export class SecondNavComponent implements OnInit {
           (item) => item._id == next._id
         );
 
-        next.__v = 1;
-
+        
         if (index > -1) {
-          this.productFromFirstNav[index].__v++;
+          this.productFromFirstNav[index].__v += 1 ;
         } else {
+          next.__v = 1;
           this.productFromFirstNav.push(next);
         }
       }, //called when emit is done => object sent from emit {this is from product item so we have the product :  this.productService.itemAdded.emit(this.productItem)}
